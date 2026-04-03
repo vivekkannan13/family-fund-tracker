@@ -1,170 +1,212 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Family Fund Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-body{
-  font-family: Arial;
-  text-align:center;
-  background:#f5f5f5;
-}
+  body{
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #74ebd5, #acb6e5);
+    margin:0;
+    padding:0;
+    color:#333;
+  }
 
-.container{
-  display:grid;
-  grid-template-columns: repeat(3,1fr);
-  gap:15px;
-  padding:30px;
-}
+  header{
+    text-align:center;
+    padding: 30px 10px;
+    background:#34495e;
+    color:white;
+  }
 
-button{
-  padding:15px;
-  font-size:16px;
-  background:green;
-  color:white;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-}
+  main{
+    max-width:900px;
+    margin:20px auto;
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  }
 
-input, select{
-  padding:10px;
-  margin:5px;
-  font-size:14px;
-}
+  h1, h2, h3{
+    margin:5px 0;
+  }
 
-#details{
-  margin-top:20px;
-  font-size:18px;
-}
+  label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+  }
+
+  select, input[type="number"]{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:16px;
+    box-sizing:border-box;
+  }
+
+  button{
+    padding:12px 25px;
+    margin-top:15px;
+    font-size:16px;
+    background:#3498db;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+  }
+
+  button:hover{
+    background:#2980b9;
+  }
+
+  #details{
+    margin-top:25px;
+    font-size:16px;
+  }
+
+  .container{
+    display:grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap:10px;
+    margin-top:20px;
+  }
+
+  .container button{
+    padding:10px;
+    font-size:14px;
+    background:#2ecc71;
+  }
+
+  table{
+    width:100%;
+    margin-top:15px;
+    border-collapse:collapse;
+  }
+
+  th, td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+  }
+
+  th{
+    background:#ecf0f1;
+  }
+
 </style>
 </head>
-
 <body>
 
-<h1>Family Monthly Fund</h1>
+<header>
+  <h1>Family Fund Tracker</h1>
+  <h3>Update Contributions</h3>
+</header>
 
-<h3>Update Contribution</h3>
+<main>
+  <label for="name">Name</label>
+  <select id="name">
+    <option>Subbiah</option>
+    <option>Rajesh</option>
+    <option>Ashok</option>
+    <option>Saravanan</option>
+    <option>Veermani</option>
+    <option>Venkat</option>
+    <option>Shanmugam</option>
+    <option>Murugan</option>
+    <option>Panju</option>
+    <option>Kandan</option>
+  </select>
 
-<select id="name">
-  <option>Subbiah</option>
-  <option>Rajesh</option>
-  <option>Ashok</option>
-  <option>Saravanan</option>
-  <option>Veermani</option>
-  <option>Venkat</option>
-  <option>Shanmugam</option>
-  <option>Murugan</option>
-  <option>Panju</option>
-  <option>Kandan</option>
-</select>
+  <label for="month">Month</label>
+  <select id="month">
+    <option>Apr</option><option>May</option><option>Jun</option><option>Jul</option>
+    <option>Aug</option><option>Sep</option><option>Oct</option><option>Nov</option><option>Dec</option>
+  </select>
 
-<select id="month">
-  <option>Apr</option>
-  <option>May</option>
-  <option>Jun</option>
-  <option>Jul</option>
-  <option>Aug</option>
-  <option>Sep</option>
-  <option>Oct</option>
-  <option>Nov</option>
-  <option>Dec</option>
-</select>
+  <input type="number" id="amount" placeholder="Enter amount">
+  <button onclick="updateAmount()">Update Contribution</button>
 
-<input type="number" id="amount" placeholder="Enter amount">
+  <div class="container">
+    <button onclick="showData('Subbiah')">Subbiah</button>
+    <button onclick="showData('Rajesh')">Rajesh</button>
+    <button onclick="showData('Ashok')">Ashok</button>
+    <button onclick="showData('Saravanan')">Saravanan</button>
+    <button onclick="showData('Veermani')">Veermani</button>
+    <button onclick="showData('Venkat')">Venkat</button>
+    <button onclick="showData('Shanmugam')">Shanmugam</button>
+    <button onclick="showData('Murugan')">Murugan</button>
+    <button onclick="showData('Panju')">Panju</button>
+    <button onclick="showData('Kandan')">Kandan</button>
+  </div>
 
-<button onclick="updateAmount()">Update</button>
+  <div id="details"></div>
+</main>
 
-<hr>
-
-<div class="container">
-  <button onclick="showData('Subbiah')">Subbiah</button>
-  <button onclick="showData('Rajesh')">Rajesh</button>
-  <button onclick="showData('Ashok')">Ashok</button>
-  <button onclick="showData('Saravanan')">Saravanan</button>
-  <button onclick="showData('Veermani')">Veermani</button>
-  <button onclick="showData('Venkat')">Venkat</button>
-  <button onclick="showData('Shanmugam')">Shanmugam</button>
-  <button onclick="showData('Murugan')">Murugan</button>
-  <button onclick="showData('Panju')">Panju</button>
-  <button onclick="showData('Kandan')">Kandan</button>
-</div>
-
-<div id="details"></div>
-
-<!-- Firebase Scripts -->
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <script>
-// Firebase Config
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyD3MPBiGCgCiZC4NyODBf_PADPg6A_rw0A",
   authDomain: "familyfund-5938b.firebaseapp.com",
   projectId: "familyfund-5938b",
-  storageBucket: "familyfund-5938b.appspot.com",
+  storageBucket: "familyfund-5938b.firebasestorage.app",
   messagingSenderId: "155160493739",
   appId: "1:155160493739:web:d3504ed4275c8b7bb281ee"
 };
-
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// ✅ Update Function
-function updateAmount() {
-  let name = document.getElementById("name").value.trim();
-  let month = document.getElementById("month").value.trim();
-  let amount = document.getElementById("amount").value.trim();
+// Update contribution (everyone can update)
+function updateAmount(){
+  let name = document.getElementById("name").value;
+  let month = document.getElementById("month").value;
+  let amount = document.getElementById("amount").value;
 
-  if (!name || !month || !amount) {
-    alert("Please fill all fields!");
+  if(amount === ""){
+    alert("Enter amount");
     return;
   }
 
-  amount = Number(amount); // convert string to number
-
-  console.log("Updating:", name, month, amount);
-
-  db.collection("funds").doc(name).set(
-    { [month]: amount },
-    { merge: true }
-  )
+  db.collection("funds").doc(name).set({
+    [month]: Number(amount)
+  }, { merge: true })
   .then(() => {
-    console.log("Firestore updated successfully");
     alert(name + " - " + month + " saved!");
-    document.getElementById("amount").value = ""; // clear input
   })
   .catch((error) => {
-    console.error("Firestore update failed:", error);
-    alert("Error saving data");
+    console.error("Error:", error);
+    alert("Error saving data.");
   });
 }
 
-// ✅ Show Function
-function showData(name) {
-  db.collection("funds").doc(name).get()
-    .then((doc) => {
-      let person = doc.data() || {};
-      let total = 0;
-      let months = ["Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
-      months.forEach(m => {
-        if (!person[m]) person[m] = 0;
-        total += person[m];
-      });
-
-      let html = "<h2>" + name + "</h2>";
-      months.forEach(m => {
-        html += m + " : ₹" + person[m] + "<br>";
-      });
-      html += "<br><b>Total : ₹" + total + "</b>";
-
-      document.getElementById("details").innerHTML = html;
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-      alert("Error fetching data");
+// Show data
+function showData(name){
+  db.collection("funds").doc(name).get().then((doc) => {
+    let person = doc.data() || {};
+    let total = 0;
+    let months = ["Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    months.forEach(m => {
+       if(!person[m]) person[m] = 0;
+       total += person[m];
     });
+
+    let html = "<h2>"+name+"</h2><table><tr><th>Month</th><th>Amount</th></tr>";
+    months.forEach(m => {
+      html += "<tr><td>"+m+"</td><td>₹"+person[m]+"</td></tr>";
+    });
+    html += "<tr><th>Total</th><th>₹"+total+"</th></tr></table>";
+
+    document.getElementById("details").innerHTML = html;
+  });
 }
 </script>
 
